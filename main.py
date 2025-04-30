@@ -8,8 +8,6 @@ import matplotlib.pyplot as plt
 
 df = pd.read_csv('movies.csv')
 
-print(df[['Title', 'Genres', 'IMDB.Rating', 'BoxOffice.Revenue']].head())
-
 df['BoxOffice.Revenue'] = pd.to_numeric(df['BoxOffice.Revenue'], errors='coerce')
 
 df_clean = df.dropna(subset=['IMDB.Rating', 'BoxOffice.Revenue'])
@@ -25,7 +23,8 @@ plt.grid(True)
 plt.tight_layout()
 plt.show()
 
-df_clean['PrimaryGenre'] = df_clean['Genres'].str.split(',').str[0]
+df_clean['PrimaryGenre'] = df_clean['Genres'].astype(str).str.split(',').str[0]
+
 genre_avg = df_clean.groupby('PrimaryGenre')['BoxOffice.Revenue'].mean().sort_values(ascending=False)
 
 plt.figure(figsize=(12, 6))

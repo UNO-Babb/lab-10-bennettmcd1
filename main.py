@@ -3,6 +3,8 @@
 #Date: 4/30/25
 #Assignment: matplot
 
+git config --global pull.rebase false
+
 import pandas as pd
 import matplotlib.pyplot as plt
 
